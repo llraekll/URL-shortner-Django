@@ -1,3 +1,5 @@
+import random
+import string
 from django.shortcuts import redirect, render
 from shorturls.forms import Url
 from shorturls.models import Urls
@@ -11,7 +13,9 @@ def home(request):
             url = form.cleaned_data['url']
             if ("http://" not in url) and ("https://" not in url) :
                 url = "http://" + url 
-            mini_url = str(uuid.uuid4())[:4]
+            N=5
+            mini_url = res = ''.join(random.choices(string.ascii_lowercase + string.ascii_uppercase+ 
+                             string.digits, k=N))
             new_url = Urls(url=url, mini_url=mini_url)
             new_url.save()
             context = {
