@@ -5,7 +5,7 @@ from django.db import models
 
 class Urls(models.Model):
     url = models.CharField(max_length=250)
-    mini_url = models.CharField(max_length=20)
+    mini_url = models.CharField(max_length=20, unique=True)
 
 
 def __str__(self):

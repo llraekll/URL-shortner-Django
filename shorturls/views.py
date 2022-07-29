@@ -11,7 +11,7 @@ def home(request):
             url = form.cleaned_data['url']
             if ("http://" not in url) and ("https://" not in url) :
                 url = "http://" + url 
-            mini_url = str(uuid.uuid4())[:6]
+            mini_url = str(uuid.uuid4())[:4]
             new_url = Urls(url=url, mini_url=mini_url)
             new_url.save()
             context = {
@@ -23,7 +23,7 @@ def home(request):
     }
     return render(request, 'index.html', context)
 
-def rediredt(request, pk):
+def reroute(request, pk):
     url_details = Urls.objects.get(mini_url=pk)
     return redirect(url_details.url)
 
